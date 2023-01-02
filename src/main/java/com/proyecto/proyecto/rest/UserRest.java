@@ -1,7 +1,9 @@
 package com.proyecto.proyecto.rest;
 
 import com.proyecto.proyecto.model.UserEntity;
+import com.proyecto.proyecto.service.UserByEmPass;
 import com.proyecto.proyecto.service.UserService;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ public class UserRest {
 
     @Autowired
     private UserService userService;
+
 
 
     @GetMapping
@@ -35,5 +38,13 @@ public class UserRest {
         }
 
     }
+
+    @GetMapping(value ="login")
+    private ResponseEntity<UserEntity> login(@RequestParam(name="email") String email,@RequestParam(name="password") String password){
+        final UserEntity user=userService.findUserByEP(email,password);
+        return ResponseEntity.ok(user);
+    }
+
+
 
 }

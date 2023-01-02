@@ -38,6 +38,8 @@ public class UserEntity {
     public UserEntity() {
     }
 
+
+
     public UserEntity(DocumentTypeEntity documentType, Long documentNumber, String name, String lastName, String email, String password) {
 
         this.documentType = documentType;

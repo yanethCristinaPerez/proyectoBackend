@@ -21,6 +21,10 @@ public class UserService  implements UserRepository{
     @Autowired
     private UserRepository repository;
 
+    @Autowired
+    private UserByEmPass userByEmPass;
+
+
     @Override
     public void flush() {
 
@@ -123,7 +127,7 @@ public class UserService  implements UserRepository{
 
     @Override
     public List<UserEntity> findAll() {
-        return null;
+        return repository.findAll();
     }
 
     @Override
@@ -170,4 +174,12 @@ public class UserService  implements UserRepository{
     public Page<UserEntity> findAll(Pageable pageable) {
         return null;
     }
+
+
+    public UserEntity findUserByEP(String email,String password){
+        return userByEmPass.findUserByEmailPass(email,password);
+    }
+
+
+
 }
