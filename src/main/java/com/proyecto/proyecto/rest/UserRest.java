@@ -41,8 +41,18 @@ public class UserRest {
 
     @GetMapping(value ="login")
     private ResponseEntity<UserEntity> login(@RequestParam(name="email") String email,@RequestParam(name="password") String password){
-        final UserEntity user=userService.findUserByEP(email,password);
-        return ResponseEntity.ok(user);
+        try{
+            System.out.println(email);
+            System.out.println(password);
+            UserEntity user=userService.findUserByEP(email,password);
+
+            return ResponseEntity.ok(user);
+
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+
+
     }
 
 
