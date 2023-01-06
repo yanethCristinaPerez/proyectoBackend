@@ -9,8 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.web.bind.annotation.PostMapping;
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping ("/users/")
@@ -39,11 +41,14 @@ public class UserRest {
 
     }
 
-    @GetMapping(value ="login")
-    private ResponseEntity<UserEntity> login(@RequestParam(name="email") String email,@RequestParam(name="password") String password){
+    @PostMapping(value = "login", consumes = "application/json", produces = "application/json")
+    private ResponseEntity<UserEntity> login(@RequestBody Map<String, Object> userl){
         try{
-            System.out.println(email);
-            System.out.println(password);
+            System.out.println("ESTAMOS EN EL METODO REQUESTMAPPING LOGIN"+userl);
+            String email=(String) userl.get("email");
+
+            String password=(String) userl.get("password");
+            System.out.println("este es el email " +email+" y el password "+password);
             UserEntity user=userService.findUserByEP(email,password);
 
             return ResponseEntity.ok(user);
