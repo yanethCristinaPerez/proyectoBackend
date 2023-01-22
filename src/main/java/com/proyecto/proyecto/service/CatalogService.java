@@ -1,7 +1,12 @@
 package com.proyecto.proyecto.service;
 
 import com.proyecto.proyecto.model.CatalogEntity;
+import com.proyecto.proyecto.model.UserEntity;
 import com.proyecto.proyecto.repository.CatalogRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -15,10 +20,14 @@ import java.util.Optional;
 import java.util.function.Function;
 
 @Service
-public class CatalogService implements  CatalogRepository{
+public class CatalogService implements CatalogRepository{
 
     @Autowired
     private CatalogRepository catalogRepository;
+
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
     public void flush() {
@@ -122,7 +131,7 @@ public class CatalogService implements  CatalogRepository{
 
     @Override
     public List<CatalogEntity> findAll() {
-        return null;
+        return catalogRepository.findAll();
     }
 
     @Override
@@ -169,4 +178,40 @@ public class CatalogService implements  CatalogRepository{
     public Page<CatalogEntity> findAll(Pageable pageable) {
         return null;
     }
+
+/*    @Override
+    public List<CatalogEntity> findByGenderContaining(String gender) {
+        return catalogRepository.findByGenderContaining(gender);
+    }
+
+*/
+
+/*
+    @Override
+    public List<CatalogEntity> findByGenderContaining(String gender) {
+
+      final String jpql= "select u from CatalogEntity catalog join catalog.gender WHERE gender =: GENDER_PARAM)";
+
+        final Query query=entityManager.createQuery(jpql)
+               .setParameter("GENDER_PARAM",gender);
+
+
+        return (List<CatalogEntity>) query.getSingleResult();
+
+    }
+
+ */
+
+    @Override
+    public List<CatalogEntity> findByGenderContaining(String gender) {
+        TypedQuery<CatalogEntity> query= entityManager.createQuery("SELECT d FROM CatalogEntity e INNER JOIN e.gender d  WHERE d gender =: GENDER_PARAM", CatalogEntity.class)
+                .setParameter("GENDER_PARAM",gender);
+
+        List<CatalogEntity> resultList = query.getResultList();
+
+
+        return resultList;
+
+    }
+
 }
