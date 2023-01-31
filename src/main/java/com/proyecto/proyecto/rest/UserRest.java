@@ -41,6 +41,7 @@ public class UserRest {
 
     }
 
+
     @PostMapping(value = "login", consumes = "application/json", produces = "application/json")
     private ResponseEntity<UserEntity> login(@RequestBody Map<String, Object> userl){
         try{

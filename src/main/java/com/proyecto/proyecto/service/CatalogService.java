@@ -179,38 +179,11 @@ public class CatalogService implements CatalogRepository{
         return null;
     }
 
-/*    @Override
-    public List<CatalogEntity> findByGenderContaining(String gender) {
-        return catalogRepository.findByGenderContaining(gender);
-    }
 
-*/
-
-/*
-    @Override
-    public List<CatalogEntity> findByGenderContaining(String gender) {
-
-      final String jpql= "select u from CatalogEntity catalog join catalog.gender WHERE gender =: GENDER_PARAM)";
-
-        final Query query=entityManager.createQuery(jpql)
-               .setParameter("GENDER_PARAM",gender);
-
-
-        return (List<CatalogEntity>) query.getSingleResult();
-
-    }
-
- */
 
     @Override
-    public List<CatalogEntity> findByGenderContaining(String gender) {
-        TypedQuery<CatalogEntity> query= entityManager.createQuery("SELECT d FROM CatalogEntity e INNER JOIN e.gender d  WHERE d gender =: GENDER_PARAM", CatalogEntity.class)
-                .setParameter("GENDER_PARAM",gender);
-
-        List<CatalogEntity> resultList = query.getResultList();
-
-
-        return resultList;
+    public List<CatalogEntity> getByGender(String gender) {
+         return catalogRepository.getByGender(gender);
 
     }
 
