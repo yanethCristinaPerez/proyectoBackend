@@ -1,19 +1,18 @@
 package com.proyecto.proyecto.rest;
 
 import com.proyecto.proyecto.model.CatalogEntity;
-import com.proyecto.proyecto.model.UserEntity;
+
 import com.proyecto.proyecto.service.CatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.catalog.Catalog;
-import java.net.URI;
+
 import java.util.List;
-import java.util.Map;
+
 
 
 @RestController
@@ -39,6 +38,14 @@ public class CatalogRest {
         }
     }
 
+    @GetMapping(value = "/buscarPorNombre")
+    public ResponseEntity<?> getCatalogByName(@RequestParam(name="name") String category) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(catalogService.getByCategory(category));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{ERROR.no se encontro productos}");
+        }
+    }
 
 }
 

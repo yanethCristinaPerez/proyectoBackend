@@ -1,6 +1,8 @@
 package com.proyecto.proyecto.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "users")
@@ -17,22 +19,25 @@ public class UserEntity {
     private DocumentTypeEntity documentType;
 
     @Column(name="documentNumber")
+    @Pattern(regexp = "^[0-9]*$", message = "documento solo puede tener numeros")
     private Long documentNumber;
 
     @Column(name="name")
+    @Pattern(regexp = "[a-zA-Z\s]+",message = "nombre solo se permiten letras y espacios")
     private String name;
 
     @Column(name="lastName")
+    @Pattern(regexp = "[a-zA-Z\s]+",message = "apellido solo se permiten letras y espacios")
     private String lastName;
 
     @Column(name="email")
+    @Email(message = "por favor ingrese un correo electronico valido")
     private String email;
 
     @Column(name="password")
+    @Pattern(regexp = "(?=^.{5,}$)((?=.*\\d)(?=.*[A-Z])(?=.*[a-z])|(?=.*\\d)(?=.*[^A-Za-z0-9])(?=.*[a-z])|(?=.*[^A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z])|(?=.*\\d)(?=.*[A-Z])(?=.*[^A-Za-z0-9]))^.*", message = "contraseña debe ser de longitud mínima 5, y debe contener letras mayúsculas,\n" +
+            "letras minúsculas y números.\n")
     private String password;
-
-    //@Column(name="termsConditions")
-    //private Boolean termsConditions;
 
 
     public UserEntity() {
@@ -48,7 +53,7 @@ public class UserEntity {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        //this.termsConditions = termsConditions;
+
     }
 
     public DocumentTypeEntity getDocumentType() {
@@ -99,14 +104,7 @@ public class UserEntity {
         this.password = password;
     }
 
-    /*public Boolean getTermsConditions() {
-        return termsConditions;
-    }
-
-   // public void setTermsConditions(Boolean termsConditions) {
-        this.termsConditions = termsConditions;
-    }*/
-
+    
     public Long getIdUser() {
         return idUser;
     }

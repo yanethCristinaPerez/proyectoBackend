@@ -26,8 +26,6 @@ public class CatalogService implements CatalogRepository{
     private CatalogRepository catalogRepository;
 
 
-    @PersistenceContext
-    private EntityManager entityManager;
 
     @Override
     public void flush() {
@@ -186,5 +184,11 @@ public class CatalogService implements CatalogRepository{
          return catalogRepository.getByGender(gender);
 
     }
+
+    @Override
+   public List<CatalogEntity> getByCategory(String category) {
+        return catalogRepository.getByCategory(category);
+    }
+
 
 }

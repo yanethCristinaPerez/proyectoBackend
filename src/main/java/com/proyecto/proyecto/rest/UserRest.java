@@ -43,7 +43,7 @@ public class UserRest {
 
 
     @PostMapping(value = "login", consumes = "application/json", produces = "application/json")
-    private ResponseEntity<UserEntity> login(@RequestBody Map<String, Object> userl){
+    private ResponseEntity<?> login(@RequestBody Map<String, Object> userl){
         try{
             System.out.println("ESTAMOS EN EL METODO REQUESTMAPPING LOGIN"+userl);
             String email=(String) userl.get("email");
@@ -52,8 +52,9 @@ public class UserRest {
             System.out.println("este es el email " +email+" y el password "+password);
             UserEntity user=userService.findUserByEP(email,password);
 
-            return ResponseEntity.ok(user);
+            //return ResponseEntity.ok(user);
 
+            return ResponseEntity.status(HttpStatus.OK).body("{\"status\":\"success\"}");
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }

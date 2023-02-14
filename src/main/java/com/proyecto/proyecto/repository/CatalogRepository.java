@@ -14,4 +14,8 @@ public interface CatalogRepository extends JpaRepository<CatalogEntity, Long> {
 
     @Query("FROM CatalogEntity where gender.gender = :gender")
     List<CatalogEntity> getByGender(String gender);
+
+    @Query("FROM CatalogEntity where category.category like %:category%")
+    List<CatalogEntity> getByCategory(String category);
+
 }
