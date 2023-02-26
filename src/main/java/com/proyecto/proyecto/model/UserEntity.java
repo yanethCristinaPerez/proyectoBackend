@@ -104,7 +104,7 @@ public class UserEntity {
         this.password = password;
     }
 
-    
+
     public Long getIdUser() {
         return idUser;
     }

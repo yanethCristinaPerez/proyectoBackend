@@ -56,6 +56,26 @@ public class CatalogEntity {
     @Column(name="price")
     private BigDecimal price;
 
+    public CatalogEntity() {
+    }
+
+    public CatalogEntity(Long idProductCatalog, String name) {
+        this.idProductCatalog = idProductCatalog;
+        this.name = name;
+    }
+
+    public CatalogEntity(SizeEntity size, GenderEntity gender, BrandEntity brand, ColorEntity color, CategoryEntity category, String name, Integer available, String image, String description, BigDecimal price) {
+        this.size = size;
+        this.gender = gender;
+        this.brand = brand;
+        this.color = color;
+        this.category = category;
+        this.name = name;
+        this.available = available;
+        this.image = image;
+        this.description = description;
+        this.price = price;
+    }
 
     public SizeEntity getSize() {
         return size;

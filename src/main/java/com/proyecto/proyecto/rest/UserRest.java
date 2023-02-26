@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping ("/users/")
+@RequestMapping ("/users")
 public class UserRest {
 
     @Autowired
@@ -33,7 +33,7 @@ public class UserRest {
 
         try{
 
-            UserEntity user= userService.save(userEntity);
+                UserEntity user= userService.save(userEntity);
             return ResponseEntity.created(new URI("/users/"+user.getIdUser())).body(user);
         }catch (Exception e){
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

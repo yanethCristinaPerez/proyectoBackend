@@ -1,6 +1,6 @@
 package com.proyecto.proyecto.service;
 
-import com.proyecto.proyecto.model.LogCatalogEntity;
+import com.proyecto.proyecto.model.LogCatalog;
 import com.proyecto.proyecto.repository.LogCatalogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -14,11 +14,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
+
 @Service
-public class LogCatalogService implements LogCatalogRepository{
+public class LogCatalogService implements LogCatalogRepository {
 
     @Autowired
     private LogCatalogRepository logCatalogRepository;
+
 
     @Override
     public void flush() {
@@ -26,17 +28,17 @@ public class LogCatalogService implements LogCatalogRepository{
     }
 
     @Override
-    public <S extends LogCatalogEntity> S saveAndFlush(S entity) {
+    public <S extends LogCatalog> S saveAndFlush(S entity) {
         return null;
     }
 
     @Override
-    public <S extends LogCatalogEntity> List<S> saveAllAndFlush(Iterable<S> entities) {
+    public <S extends LogCatalog> List<S> saveAllAndFlush(Iterable<S> entities) {
         return null;
     }
 
     @Override
-    public void deleteAllInBatch(Iterable<LogCatalogEntity> entities) {
+    public void deleteAllInBatch(Iterable<LogCatalog> entities) {
 
     }
 
@@ -51,67 +53,67 @@ public class LogCatalogService implements LogCatalogRepository{
     }
 
     @Override
-    public LogCatalogEntity getOne(Long aLong) {
+    public LogCatalog getOne(Long aLong) {
         return null;
     }
 
     @Override
-    public LogCatalogEntity getById(Long aLong) {
+    public LogCatalog getById(Long aLong) {
         return null;
     }
 
     @Override
-    public LogCatalogEntity getReferenceById(Long aLong) {
+    public LogCatalog getReferenceById(Long aLong) {
         return null;
     }
 
     @Override
-    public <S extends LogCatalogEntity> Optional<S> findOne(Example<S> example) {
+    public <S extends LogCatalog> Optional<S> findOne(Example<S> example) {
         return Optional.empty();
     }
 
     @Override
-    public <S extends LogCatalogEntity> List<S> findAll(Example<S> example) {
+    public <S extends LogCatalog> List<S> findAll(Example<S> example) {
         return null;
     }
 
     @Override
-    public <S extends LogCatalogEntity> List<S> findAll(Example<S> example, Sort sort) {
+    public <S extends LogCatalog> List<S> findAll(Example<S> example, Sort sort) {
         return null;
     }
 
     @Override
-    public <S extends LogCatalogEntity> Page<S> findAll(Example<S> example, Pageable pageable) {
+    public <S extends LogCatalog> Page<S> findAll(Example<S> example, Pageable pageable) {
         return null;
     }
 
     @Override
-    public <S extends LogCatalogEntity> long count(Example<S> example) {
+    public <S extends LogCatalog> long count(Example<S> example) {
         return 0;
     }
 
     @Override
-    public <S extends LogCatalogEntity> boolean exists(Example<S> example) {
+    public <S extends LogCatalog> boolean exists(Example<S> example) {
         return false;
     }
 
     @Override
-    public <S extends LogCatalogEntity, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction) {
+    public <S extends LogCatalog, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction) {
         return null;
     }
 
     @Override
-    public <S extends LogCatalogEntity> S save(S entity) {
+    public <S extends LogCatalog> S save(S entity) {
         return null;
     }
 
     @Override
-    public <S extends LogCatalogEntity> List<S> saveAll(Iterable<S> entities) {
+    public <S extends LogCatalog> List<S> saveAll(Iterable<S> entities) {
         return null;
     }
 
     @Override
-    public Optional<LogCatalogEntity> findById(Long aLong) {
+    public Optional<LogCatalog> findById(Long aLong) {
         return Optional.empty();
     }
 
@@ -121,12 +123,12 @@ public class LogCatalogService implements LogCatalogRepository{
     }
 
     @Override
-    public List<LogCatalogEntity> findAll() {
+    public List<LogCatalog> findAll() {
         return null;
     }
 
     @Override
-    public List<LogCatalogEntity> findAllById(Iterable<Long> longs) {
+    public List<LogCatalog> findAllById(Iterable<Long> longs) {
         return null;
     }
 
@@ -141,7 +143,7 @@ public class LogCatalogService implements LogCatalogRepository{
     }
 
     @Override
-    public void delete(LogCatalogEntity entity) {
+    public void delete(LogCatalog entity) {
 
     }
 
@@ -151,7 +153,7 @@ public class LogCatalogService implements LogCatalogRepository{
     }
 
     @Override
-    public void deleteAll(Iterable<? extends LogCatalogEntity> entities) {
+    public void deleteAll(Iterable<? extends LogCatalog> entities) {
 
     }
 
@@ -161,12 +163,17 @@ public class LogCatalogService implements LogCatalogRepository{
     }
 
     @Override
-    public List<LogCatalogEntity> findAll(Sort sort) {
+    public List<LogCatalog> findAll(Sort sort) {
         return null;
     }
 
     @Override
-    public Page<LogCatalogEntity> findAll(Pageable pageable) {
+    public Page<LogCatalog> findAll(Pageable pageable) {
         return null;
+    }
+
+    @Override
+    public List<String> mostrarLog() {
+        return logCatalogRepository.mostrarLog();
     }
 }

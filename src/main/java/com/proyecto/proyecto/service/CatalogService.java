@@ -1,5 +1,6 @@
 package com.proyecto.proyecto.service;
 
+import com.proyecto.proyecto.model.LogCatalog;
 import com.proyecto.proyecto.model.CatalogEntity;
 import com.proyecto.proyecto.model.UserEntity;
 import com.proyecto.proyecto.repository.CatalogRepository;
@@ -64,7 +65,7 @@ public class CatalogService implements CatalogRepository{
 
     @Override
     public CatalogEntity getById(Long aLong) {
-        return null;
+        return catalogRepository.getById(aLong);
     }
 
     @Override
@@ -189,6 +190,18 @@ public class CatalogService implements CatalogRepository{
    public List<CatalogEntity> getByCategory(String category) {
         return catalogRepository.getByCategory(category);
     }
+
+    @Override
+    public List<CatalogEntity> findCatalogEntityByDescriptionEqualsIgnoreCaseOrColorEqualsIgnoreCaseOrBrandEqualsIgnoreCaseAndGender(String descrip, String genero) {
+        return catalogRepository.findCatalogEntityByDescriptionEqualsIgnoreCaseOrColorEqualsIgnoreCaseOrBrandEqualsIgnoreCaseAndGender(descrip,genero);
+    }
+
+    @Override
+    public void guardarLog(int id,String nombre) {
+         catalogRepository.guardarLog(id,nombre);
+    }
+
+
 
 
 }
