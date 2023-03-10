@@ -11,7 +11,7 @@ public interface InterfazServicioCarrito {
 
     void borrarCarritoByIdItem(Carrito carrito) throws Exception;
 
-    List<Carrito> obtenerCarritosByUsuario(Usuario usuario) throws Exception;
+    List<Carrito> obtenerCarritosByUsuario(Long id) throws Exception;
 
 
 }

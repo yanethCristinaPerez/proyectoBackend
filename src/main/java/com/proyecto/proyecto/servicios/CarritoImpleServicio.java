@@ -26,7 +26,7 @@ public class CarritoImpleServicio implements InterfazServicioCarrito{
     }
 
     @Override
-    public List<Carrito> obtenerCarritosByUsuario(Usuario usuario) throws Exception {
-        return carritoRepositorio.findCarritoByUsuario(usuario);
+    public List<Carrito> obtenerCarritosByUsuario(Long id) throws Exception {
+        return carritoRepositorio.findCarritoByUsuario(id);
     }
 }

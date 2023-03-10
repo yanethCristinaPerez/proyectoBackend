@@ -45,27 +45,7 @@ public class UsuarioRest {
 
     }
 
-    /*@PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Usuario usuario) {
-        try {
-            Boolean isLogin = usuarioImpleServicio.loginUsuario(usuario.getCorreo(), usuario.getContrasena());
-            if (isLogin) {
-                System.out.println("login success");
-                System.out.println("correo"+usuario.getCorreo());
-                String correo = usuario.getCorreo();
-                Map<String, String> respuesta = new HashMap<>();
-                respuesta.put("correo_electronico", correo);
-                ObjectMapper objectMapper = new ObjectMapper();
-                String json = objectMapper.writeValueAsString(respuesta);
-                return ResponseEntity.status(HttpStatus.OK).body(json);
-            } else {
-                System.out.println("usuario no existe");
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\":\"correo o contraseña incorrectos\"}");
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"Error\":\"Error en la respuesta\"}" + e.getMessage());
-        }
-    }*/
+
 
     @PostMapping(value = "/login", consumes = "application/json", produces = "application/json")
     private ResponseEntity<?> login(@RequestBody Map<String, Object> userl){

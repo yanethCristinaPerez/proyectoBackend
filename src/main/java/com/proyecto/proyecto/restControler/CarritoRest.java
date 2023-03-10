@@ -2,17 +2,16 @@ package com.proyecto.proyecto.restControler;
 
 
 import com.proyecto.proyecto.entidades.Carrito;
+import com.proyecto.proyecto.entidades.TiposDocumentos;
 import com.proyecto.proyecto.entidades.Usuario;
 import com.proyecto.proyecto.servicios.CarritoImpleServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/carritos")
@@ -36,5 +35,15 @@ public class CarritoRest {
 
     }
 
+    @GetMapping (value = "/{id}")
+    private ResponseEntity<List<Carrito>> getAllCarritos(@PathVariable Long id){
+        System.out.println("esoy en el metodo obtener items");
+        try {
+            return ResponseEntity.ok(carritoImpleServicio.obtenerCarritosByUsuario(id));
+
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
 
 }
