@@ -21,8 +21,8 @@ public class CarritoImpleServicio implements InterfazServicioCarrito{
     }
 
     @Override
-    public void borrarCarritoByIdItem(Carrito carrito) throws Exception {
-         carritoRepositorio.delete(carrito);
+    public void borrarCarritoByIdItem(Long id) throws Exception {
+         carritoRepositorio.deleteById(id);
     }
 
     @Override

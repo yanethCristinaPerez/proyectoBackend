@@ -9,7 +9,7 @@ public interface InterfazServicioCarrito {
 
     Carrito grabarCarrito(Carrito carrito) throws Exception;
 
-    void borrarCarritoByIdItem(Carrito carrito) throws Exception;
+    void borrarCarritoByIdItem(Long id) throws Exception;
 
     List<Carrito> obtenerCarritosByUsuario(Long id) throws Exception;
 

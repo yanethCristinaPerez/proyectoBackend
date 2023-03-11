@@ -27,7 +27,7 @@ public class ProductosServicios implements InterfazServiciosProductos{
 
     @Override
     public void actualizarBusqueda(Productos producto) throws Exception {
-       // producto.setContadorBusquedas(producto.getContadorBusquedas()+1);
+        producto.setContadorBusquedas(producto.getContadorBusquedas()+1);
         productoRepositorio.save(producto);
     }
 

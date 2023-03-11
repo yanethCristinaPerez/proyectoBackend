@@ -25,6 +25,7 @@ public class Carrito {
     private Productos productos;
 
 
+
     public Carrito() {
     }
 
@@ -34,6 +35,7 @@ public class Carrito {
         this.usuario = usuario;
         this.productos = productos;
     }
+
 
     public Productos getProductos() {
         return productos;

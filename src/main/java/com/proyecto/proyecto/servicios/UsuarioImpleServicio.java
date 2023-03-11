@@ -62,4 +62,9 @@ public class UsuarioImpleServicio implements InterfazServicioUsuario{
     public Usuario obternerUsuarioPorCorreoContrasena(String correo, String contrasena) throws Exception {
         return usuarioRepositorio.findByCorreoAndContrasena(correo,contrasena);
     }
+
+    @Override
+    public Usuario obtenerUsuarioByIdUsuario(Long id) {
+        return usuarioRepositorio.findByidUsuarios(id);
+    }
 }

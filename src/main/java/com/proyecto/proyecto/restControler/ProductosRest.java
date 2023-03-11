@@ -43,6 +43,8 @@ public class ProductosRest {
 
     @GetMapping("/{genero}/{termino}")
     public ResponseEntity<?> busquedaProducto(@PathVariable String genero, @PathVariable String termino) {
+
+
         try {
             return ResponseEntity.status(HttpStatus.OK).body(productosServicios.buscarPorDescripcionMarcaColor(termino,genero));
 

@@ -16,4 +16,6 @@ public interface InterfazServicioUsuario {
     Usuario obternerUsuarioPorCorreo(String correo) throws Exception;
 
     Usuario obternerUsuarioPorCorreoContrasena(String correo, String contrasena) throws Exception;
+
+    Usuario obtenerUsuarioByIdUsuario(Long id);
 }
