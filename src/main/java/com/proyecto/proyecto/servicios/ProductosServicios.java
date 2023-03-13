@@ -16,28 +16,44 @@ public class ProductosServicios implements InterfazServiciosProductos{
 
 
     @Override
-    public List<Productos> buscarPorDescripcionMarcaColor(String termino, String genero) {
-        return productoRepositorio.findProductosByDescripcionOrColorOrMarcaAndGenero(termino,genero);
+    public List<Productos> masBuscados(String termino, String genero) {
+
+
+        try{
+
+            List<Productos> productoList = productoRepositorio.findProductosByDescripcionOrColorOrMarcaAndGenero(termino,genero);
+
+
+            for (Productos producto : productoList) {
+                contadorMasBuscados(producto);
+            }
+
+            return productoList;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+
     }
 
     @Override
-    public Optional<Productos> obtenerProductosPorId(Long id) throws Exception {
+    public Optional<Productos> getById(Long id) throws Exception {
         return productoRepositorio.findById(id);
     }
 
     @Override
-    public void actualizarBusqueda(Productos producto) throws Exception {
+    public void contadorMasBuscados(Productos producto) throws Exception {
         producto.setContadorBusquedas(producto.getContadorBusquedas()+1);
         productoRepositorio.save(producto);
     }
 
     @Override
-    public List<Productos> obtenerProductosMasBuscados() throws Exception {
+    public List<Productos> getMasBuscados() throws Exception {
         return productoRepositorio.findTop4ByOrderByContadorBusquedasDesc();
     }
 
     @Override
-    public List<Productos> buscarPorGenero(String genero) {
+    public List<Productos> getByGenero(String genero) {
         return productoRepositorio.getByGenero(genero);
     }
 }

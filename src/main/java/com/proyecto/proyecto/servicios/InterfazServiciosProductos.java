@@ -7,15 +7,16 @@ import java.util.Optional;
 
 public interface InterfazServiciosProductos {
 
-    List<Productos> buscarPorDescripcionMarcaColor(String termino, String genero);
+    List<Productos> masBuscados(String termino, String genero);
 
-    Optional<Productos> obtenerProductosPorId(Long id) throws Exception;
+    Optional<Productos> getById(Long id) throws Exception;
 
-    void actualizarBusqueda(Productos producto) throws Exception;
+    void contadorMasBuscados(Productos producto) throws Exception;
+    List<Productos> getMasBuscados() throws Exception;
 
-    List<Productos> obtenerProductosMasBuscados() throws Exception;
+    List<Productos> getByGenero(String genero);
 
-    List<Productos> buscarPorGenero(String genero);
+
 
 
 }
