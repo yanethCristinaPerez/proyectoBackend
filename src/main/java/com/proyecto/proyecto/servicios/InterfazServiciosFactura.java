@@ -10,7 +10,4 @@ public interface InterfazServiciosFactura {
 
     Factura guardarFactura(Factura factura) throws Exception;
 
-    List<Factura> findByUsuario (Usuario usuario);
-
-    Optional<Factura> findById(Long id);
 }

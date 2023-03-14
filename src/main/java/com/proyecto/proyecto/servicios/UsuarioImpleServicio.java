@@ -50,7 +50,7 @@ public class UsuarioImpleServicio implements InterfazServicioUsuario{
     }
 
     @Override
-    public Usuario obternerUsuarioPorCorreo(String correo) throws Exception {
+    public Usuario getPorCorreo(String correo) throws Exception {
         try {
             return usuarioRepositorio.findByCorreo(correo);
         }catch (Exception e){
@@ -59,7 +59,7 @@ public class UsuarioImpleServicio implements InterfazServicioUsuario{
     }
 
     @Override
-    public Usuario obternerUsuarioPorCorreoContrasena(String correo, String contrasena) throws Exception {
+    public Usuario getPorCorreoContrasena(String correo, String contrasena) throws Exception {
         return usuarioRepositorio.findByCorreoAndContrasena(correo,contrasena);
     }
 

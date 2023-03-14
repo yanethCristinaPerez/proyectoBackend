@@ -23,13 +23,4 @@ public class FacturaImpleServicio implements InterfazServiciosFactura{
 
     }
 
-    @Override
-    public List<Factura> findByUsuario(Usuario usuario) {
-        return facturaRepositorio.findByUsuario(usuario);
-    }
-
-    @Override
-    public Optional<Factura> findById(Long id) {
-        return facturaRepositorio.findById(id);
-    }
 }

@@ -2,7 +2,9 @@ package com.proyecto.proyecto.restControler;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.proyecto.proyecto.entidades.Factura;
 import com.proyecto.proyecto.entidades.Usuario;
+import com.proyecto.proyecto.servicios.EnvioCorreoService;
 import com.proyecto.proyecto.servicios.UsuarioImpleServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +24,8 @@ public class UsuarioRest {
     @Autowired
     private UsuarioImpleServicio usuarioImpleServicio;
 
+    @Autowired
+    private EnvioCorreoService envioCorreoService;
 
     @GetMapping
     private ResponseEntity<List<Usuario>> getAllUsers(){
@@ -55,7 +59,7 @@ public class UsuarioRest {
 
             String password=(String) userl.get("contrasena");
             System.out.println("este es el email " +correo+" y el password "+password);
-            Usuario user= usuarioImpleServicio.obternerUsuarioPorCorreoContrasena(correo,password);
+            Usuario user= usuarioImpleServicio.getPorCorreoContrasena(correo,password);
 
             Map<String, String> respuesta = new HashMap<>();
             respuesta.put("correo", correo);
@@ -75,9 +79,25 @@ public class UsuarioRest {
     @GetMapping("/{correo}")
     public ResponseEntity<Usuario> obternerUsuarioPorCorreo(@PathVariable String correo, Usuario usuario) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(usuarioImpleServicio.obternerUsuarioPorCorreo(correo));
+            return ResponseEntity.status(HttpStatus.OK).body(usuarioImpleServicio.getPorCorreo(correo));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+
+    @PostMapping("/sendMail")
+    public String sendMail(@RequestParam("mail") String mail,@RequestParam("body") Factura factura){
+
+        try{
+
+            System.out.println("estoy en el metodo enviar email");
+
+
+            envioCorreoService.sendMail(mail,factura);
+            return "send_mail_view";
+        }catch (Exception e){
+            return "error"+e.getMessage();
         }
     }
 }
