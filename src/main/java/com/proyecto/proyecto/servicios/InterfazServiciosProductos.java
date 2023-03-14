@@ -16,7 +16,9 @@ public interface InterfazServiciosProductos {
 
     List<Productos> getByGenero(String genero);
 
+    boolean descontarCantidad(Long idProducto, int cantidadPedida);
 
+    String isDisponible(Long idProducto, int cantidadPedida);
 
 
 }

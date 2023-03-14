@@ -1,11 +1,15 @@
 package com.proyecto.proyecto.restControler;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.proyecto.proyecto.servicios.ProductosServicios;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value="/catalogo")
@@ -60,5 +64,31 @@ public class ProductosRest {
     }
 
 
+    @GetMapping("desc/{id}/{cantidadPedida}")
+    private ResponseEntity<?> descontarInventario(@PathVariable Long id,@PathVariable int cantidadPedida) {
+        try {
+            return ResponseEntity.ok(productosServicios.descontarCantidad(id,cantidadPedida));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+
+    @GetMapping("dispo/{id}/{cantidadPedida}")
+    private ResponseEntity<?> disponible(@PathVariable Long id,@PathVariable int cantidadPedida) {
+
+        try {
+
+            String dispo= productosServicios.isDisponible(id,cantidadPedida);
+
+            Map<String, String> respuesta = new HashMap<>();
+            respuesta.put("disponible", dispo);
+            ObjectMapper objectMapper = new ObjectMapper();
+            String json = objectMapper.writeValueAsString(respuesta);
+
+            return ResponseEntity.ok(json);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
 }

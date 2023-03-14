@@ -1,0 +1,109 @@
+CREATE DATABASE Convertic_shop
+
+
+CREATE TABLE public.color (
+	id_color bigserial NOT NULL,
+	color varchar(255) NULL,
+	CONSTRAINT color_pkey PRIMARY KEY (id_color)
+);
+
+
+CREATE TABLE public.genero (
+	id_genero bigserial NOT NULL,
+	genero varchar(255) NULL,
+	CONSTRAINT genero_pkey PRIMARY KEY (id_genero)
+);
+
+
+
+CREATE TABLE public.marca (
+	id_marca bigserial NOT NULL,
+	marca varchar(255) NULL,
+	CONSTRAINT marca_pkey PRIMARY KEY (id_marca)
+);
+
+
+CREATE TABLE public.tallas (
+	id_tallas bigserial NOT NULL,
+	talla varchar(255) NULL,
+	CONSTRAINT tallas_pkey PRIMARY KEY (id_tallas)
+);
+
+
+
+CREATE TABLE public.tipos_documentos (
+	id_tipo_documento int8 NOT NULL,
+	tipo_documento varchar(255) NULL,
+	CONSTRAINT tipos_documentos_pkey PRIMARY KEY (id_tipo_documento)
+);
+
+
+
+CREATE TABLE public.productos (
+	id_productos bigserial NOT NULL,
+	cantidad_disponible int4 NULL,
+	contador_busquedas int4 NOT NULL,
+	descripcion varchar(255) NULL,
+	imagen varchar(255) NULL,
+	nombre varchar(255) NULL,
+	precio numeric(38, 2) NULL,
+	id_color int8 NULL,
+	id_genero int8 NULL,
+	id_marca int8 NULL,
+	id_talla int8 NULL,
+	CONSTRAINT productos_pkey PRIMARY KEY (id_productos),
+	CONSTRAINT fk1qqeip4j4cu4jwgb0hg8m0192 FOREIGN KEY (id_talla) REFERENCES public.tallas(id_tallas),
+	CONSTRAINT fk3attn11ryqxbdiivv2bhhb3vh FOREIGN KEY (id_marca) REFERENCES public.marca(id_marca),
+	CONSTRAINT fk4sbnhudhcjr1pxd9j00txciq FOREIGN KEY (id_genero) REFERENCES public.genero(id_genero),
+	CONSTRAINT fkoijms7mi63sfgvcswyy9kqyu6 FOREIGN KEY (id_color) REFERENCES public.color(id_color)
+);
+
+
+
+CREATE TABLE public.usuarios (
+	id_usuarios int8 NOT NULL,
+	apellidos varchar(255) NOT NULL,
+	contrasena varchar(255) NOT NULL,
+	correo varchar(255) NOT NULL,
+	nombres varchar(255) NOT NULL,
+	numero_documento varchar(255) NOT NULL,
+	id_tipo_documento int8 NULL,
+	CONSTRAINT usuarios_pkey PRIMARY KEY (id_usuarios),
+	CONSTRAINT fk6ss71koavqid8gy2yo6uo6sp FOREIGN KEY (id_tipo_documento) REFERENCES public.tipos_documentos(id_tipo_documento)
+);
+
+
+
+CREATE TABLE public.carrito (
+	id_items bigserial NOT NULL,
+	cantidad_pedida int4 NOT NULL,
+	productos_id_productos int8 NULL,
+	talla_pedida_id_tallas int8 NULL,
+	usuario_id_usuarios int8 NULL,
+	CONSTRAINT carrito_pkey PRIMARY KEY (id_items),
+	CONSTRAINT fk3eenvovwq77n4n8q61lam7439 FOREIGN KEY (usuario_id_usuarios) REFERENCES public.usuarios(id_usuarios),
+	CONSTRAINT fkag3bf1yq5qcxaqi81c1kyw3t8 FOREIGN KEY (talla_pedida_id_tallas) REFERENCES public.tallas(id_tallas),
+	CONSTRAINT fkghxn24plcmnhe21j08ybeu6bb FOREIGN KEY (productos_id_productos) REFERENCES public.productos(id_productos)
+);
+
+
+
+CREATE TABLE public.factura (
+	id_factura bigserial NOT NULL,
+	ciudad varchar(255) NULL,
+	correo varchar(255) NULL,
+	direccion varchar(255) NULL,
+	fecha date NULL,
+	usuario_id_usuarios int8 NULL,
+	CONSTRAINT factura_pkey PRIMARY KEY (id_factura),
+	CONSTRAINT fki4o1q0fy2nkycd1gdldd1rhw4 FOREIGN KEY (usuario_id_usuarios) REFERENCES public.usuarios(id_usuarios)
+);
+
+
+CREATE TABLE public.factura_detalles (
+	factura_id_factura int8 NOT NULL,
+	detalles_id_items int8 NOT NULL,
+	CONSTRAINT uk_br62tu33nondi1ftf074d7qg4 UNIQUE (detalles_id_items),
+	CONSTRAINT fk97duqcw9r4st340kpfc0lrieu FOREIGN KEY (detalles_id_items) REFERENCES public.carrito(id_items),
+	CONSTRAINT fkecl55k8j7sh972ytsrjv8vsqi FOREIGN KEY (factura_id_factura) REFERENCES public.factura(id_factura)
+);
